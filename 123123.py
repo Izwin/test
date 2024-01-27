@@ -4,7 +4,7 @@ import io
 import os
 import random
 import time
-
+from flask import Flask
 
 BASE_URL = "https://monitoring.e-kassa.gov.az/pks-monitoring/2.0.0/documents/"
 MIN_SIZE = 4000
@@ -43,5 +43,19 @@ def get_public_ip():
     return response.text.strip()
 
 
+
+
+
+app = Flask(__name__)
+
+
+@app.route("/")
+def hello_world():
+    """Example Hello World route."""
+    name = os.environ.get("NAME", "World")
+    return f"Hello {name}!"
+
+
 if __name__ == "__main__":
     main()
+    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
